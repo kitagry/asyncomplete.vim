@@ -3,12 +3,12 @@ if exists('g:asyncomplete_loaded')
 endif
 let g:asyncomplete_loaded = 1
 
-let s:is_nvim = has('nvim')
 " patch-8.2.0782: https://github.com/vim/vim/pull/6063
 " patch-8.2.0858: https://github.com/vim/vim/pull/6098
-let s:has_lua = has('nvim-0.5.0') || (has('lua') && has('patch-8.2.0782') && has('patch-8.2.0858'))
+" patch-8.2:      https://github.com/vim/vim/pull/6246
+let g:asyncomplete_use_lua = get(g:, 'asyncomplete_use_lua', has('nvim-0.5.0') || (has('lua') && has('patch-8.2.0782') && has('patch-8.2.0858')))
 
-if s:has_lua
+if g:asyncomplete_use_lua
     lua asyncomplete = require('asyncomplete')
     lua asyncomplete.init()
 else
